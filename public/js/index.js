@@ -83,7 +83,8 @@ window.onload = function () {
           socket.emit('requestImages');
         }
         if (this.id == 'reels-page') {
-          $('#reel-info').text(reelSummaries[0]);
+          $('#scroll-player').attr('src', reels.clips[0]);
+          $('#reel-info').text(reels.summaries[0]);
         }
       }
     });
@@ -106,23 +107,23 @@ window.onload = function () {
   // Click event to scroll to bottom of reels page.
   $('#down-arrow').click(function(e) {
     $('body').animate({scrollTop: document.body.scrollHeight}, 500);
-    //document.body.scrollTop = document.body.scrollHeight;
   });
 
 
   // Click event handler for swapping reel clips.
-  reelSummaries = ['Qi Aerista Kickstarter Promo', 'Avid Dance Company Promo']
-  reels = ['https://www.youtube.com/embed/nIS6qMorab4',
-    'https://www.youtube.com/embed/iYZZ6d-JrtU'];
+  reels = {
+    'summaries': ['Qi Aerista Kickstarter Promo', 'Avid Dance Company Promo'],
+    'clips': ['https://www.youtube.com/embed/nIS6qMorab4','https://www.youtube.com/embed/iYZZ6d-JrtU']
+  }
   reelNum = 0;
   $('#left-arrow').click(function(e) {
-    $('#scroll-player').attr('src', reels[--reelNum % reels.length]);
-    $('#reel-info').text(reelSummaries[reelNum % reelSummaries.length]);
+    $('#scroll-player').attr('src', reels.clips[--reelNum % reels.clips.length]);
+    $('#reel-info').text(reels.summaries[reelNum % reels.summaries.length]);
   });
   $('#right-arrow').click(function(e) {
-    $('#scroll-player').attr('src', reels[++reelNum % reels.length]);
-    $('#reel-info').text(reelSummaries[reelNum % reelSummaries.length]);
+    $('#scroll-player').attr('src', reels.clips[++reelNum % reels.clips.length]);
+    $('#reel-info').text(reels.summaries[reelNum % reels.summaries.length]);
   });
 
-  //$('#reels').trigger('click');
+  $('#reels').trigger('click');
 }

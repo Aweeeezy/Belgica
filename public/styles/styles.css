@@ -74,10 +74,12 @@ img { float: right; height: 100%; margin-top: -8%; }
   opacity: 1;
 }
 #left-arrow {
+  //display: none;
   left: 10%;
   top: 140%;
 }
 #right-arrow {
+  //display: none;
   right: 10%;
   top: 140%;
 }
