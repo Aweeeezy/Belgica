@@ -57,14 +57,14 @@ window.onload = function () {
   // Function for swapping the background image of the main container.
   function swapBackground(background, callback) {
     $('#main-container').animate({opacity: 0}, 600, function() {
-      if (background.indexOf("new_photo.jpg") !== -1) {
+      /*if (background.indexof("new_photo.jpg") !== -1) {
         var size = '115%';
       } else {
         var size = '100%';
-      }
+      }*/
       $('#main-container').css({
         'background': background,
-        'background-size': size
+        'background-size': '100%'
       });
       $('#main-container').animate({opacity: 1}, 600);
       callback();
@@ -78,7 +78,9 @@ window.onload = function () {
       if (this.id != newid+'-page') {
         this.style.display = 'none';
       } else {
+        var width = $("#links-container").css("width");
         this.style.display = 'inline';
+        $("#links-container").css({"width": width});
         if (this.id == 'portfolio-page') {
           socket.emit('requestImages');
         }
@@ -125,5 +127,5 @@ window.onload = function () {
     $('#reel-info').text(reels.summaries[reelNum % reels.summaries.length]);
   });
 
-  $('#reels').trigger('click');
+  //$('#reels').trigger('click');
 }

@@ -17,7 +17,6 @@ img { float: right; height: 100%; margin-top: -8%; }
   background: url("../images/new_photo.jpg") no-repeat fixed -15em center;
   background-size: 115%;
   height: 90%;
-  /*height: 100%;*/   // For hidden tab bar
   width: 100%;
 }
 #landing-page { display: inline; }
@@ -36,7 +35,6 @@ img { float: right; height: 100%; margin-top: -8%; }
 
 #fixed-reel {
   height: 100%;
-  width: 100%;
 }
 .reel-player {
   left: 50%;
@@ -52,7 +50,6 @@ img { float: right; height: 100%; margin-top: -8%; }
 }
 #scrolling-reel {
   height: 110%;
-  width: 100%;
 }
 #scrolling-reel > iframe {
   top: 100%;
@@ -74,12 +71,10 @@ img { float: right; height: 100%; margin-top: -8%; }
   opacity: 1;
 }
 #left-arrow {
-  //display: none;
   left: 10%;
   top: 140%;
 }
 #right-arrow {
-  //display: none;
   right: 10%;
   top: 140%;
 }
