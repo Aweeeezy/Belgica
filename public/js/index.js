@@ -9,30 +9,7 @@ window.onload = function () {
     if ($(window).scrolltop() == 0 && url.indexof('headshot_light') !== -1) {
       swapbackground('url(../images/new_photo.jpg) no-repeat -15em center fixed', function() {});
     }
-    // Switches main photo on scroll
-    /*if (Math.ceil($(window).scrollTop() + $('#main-container').height()) == $(document).height()
-        && url.indexOf('new_photo') !== -1) {
-      swapBackground('url(../images/headshot_light.jpg) no-repeat center 70% fixed', function() {});
-    } else if ($(window).scrolltop() == 0 && url.indexof('headshot_light') !== -1) {
-      swapbackground('url(../images/new_photo.jpg) no-repeat -15em center fixed', function() {});
-    }*/
   });
-
-
-  // Scrolls to bottom if mouse is within 20% of the document's bottom.
-  /*var dontRotate = false
-  $(window).mousemove(function(e) {
-    y = e.pageY;
-    h = $(window).height();
-    bottom = h - (.2 * h);
-    if (dontRotate && y < bottom) {
-      dontRotate = false;
-    }
-    if (y > bottom && !dontRotate) {
-      $('html, body').animate({scrollTop: $(window).height()}, 600);
-      dontRotate = true;
-    }
-  });*/
 
 
   // Click event handler for exposing subsections of the site.
@@ -57,11 +34,6 @@ window.onload = function () {
   // Function for swapping the background image of the main container.
   function swapBackground(background, callback) {
     $('#main-container').animate({opacity: 0}, 600, function() {
-      /*if (background.indexof("new_photo.jpg") !== -1) {
-        var size = '115%';
-      } else {
-        var size = '100%';
-      }*/
       $('#main-container').css({
         'background': background,
         'background-size': '100%'
@@ -103,6 +75,11 @@ window.onload = function () {
       var thumb = "<img class='image-container' src='images/portfolio/thumbnails/"+obj.thumbs[j]+"\'>";
       $('#mini-images-container').html($('#mini-images-container').html() + "\n" + thumb);
     }
+    alert("wrapper1: " + $("#wrapper1").css("height") + "\n" + "images-container: " + $("#images-container").css("height") + "\n" + "wrapper2: " + $("#wrapper1").css("height") + "\n" + "mini-images-container: " + $("#mini-images-container").css("height") + "\n" + "image: " + $(".image-container").css("height"));
+  });
+
+  $("#wrapper2").scroll(function(e) {
+    alert('mini scrolling');
   });
 
 

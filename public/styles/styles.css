@@ -110,9 +110,11 @@ img { float: right; height: 100%; margin-top: -8%; }
   width: 85%;
 }
 #mini-images-container {
-  height: 115%;
+  display: inline-block;
+  min-height: 110%;  /* "height" doesn't fix y-axis scrolling */
   overflow-x: scroll;
   overflow-y: hidden;
+  position: absolute;
   width: 100%;
   white-space: nowrap;
 }
