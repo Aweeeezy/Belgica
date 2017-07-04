@@ -1,15 +1,26 @@
 var express = require('express')
   , app = exports.app = express()
-  , server_port = process.env.PORT || 3001
+  , server_port = process.env.PORT || 8000
   , server_ip_address = '127.0.0.1'
-  , server = app.listen(server_port, server_ip_address)
-  , bodyParser = require('body-parser')
-  , rand = require('csprng')
   , path = require('path')
-  , sizeOf = require('image-size')
-  , io = require('socket.io')(server)
   , fs = require('fs');
 
+
+app.use('/', express.static(__dirname+'/public'));
+
+// landing route
+/*app.get('/', function (req, res) {
+  res.sendfile(__dirname+'/public/index.html');
+});
+
+// admin route
+app.get('/admin', function (req, res) {
+  console.log("admin route");
+  res.sendfile(__dirname+'/admin/index.html');
+});*/
+
+var server = app.listen(server_port, server_ip_address);
+var io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
   socket.on('requestImages', function () {
@@ -34,14 +45,4 @@ io.on('connection', function (socket) {
       });
     });
   });
-});
-
-app.use(express.static(__dirname+'/public'));
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
-
-// Landing route
-app.get('/', function (req, res) {
-  res.sendFile(__dirname+'/public/index.html');
 });

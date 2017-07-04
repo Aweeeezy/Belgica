@@ -1,47 +1,44 @@
 window.onload = function () {
-
   var portfolioImages = [];
 
   var socket = io();
-  socket.connect("http://localhost:3001/socket.io.js");
+  socket.connect("http://localhost:8000/socket.io.js");
 
   // Click event handler for exposing subsections of the site.
   $('.link').click(function(e) {
     newid = this.id;
     if (this.id == 'about') {
-      swapBackground('url(../images/day_of_the_dead.jpg) no-repeat center center fixed', changeSection);
+      swapBackground('url(../images/site_photos/day_of_the_dead.jpg) no-repeat center -15em fixed', changeSection);
     } else if (this.id == 'reels') {
       swapBackground('none', changeSection);
     } else if (this.id == 'portfolio') {
       swapBackground('none', changeSection);
     } else if (this.id == 'resume') {
       swapBackground('none', changeSection);
-    } else if (this.id == 'events') {
-      swapBackground('url(../images/Bandelion_dark.jpg) no-repeat center center fixed', changeSection);
     } else if (this.id == 'contact') {
-      swapBackground('url(../images/Bandelion_light.jpg) no-repeat center center fixed', changeSection);
+      swapBackground('none', changeSection);
     }
   });
 
 
   // Click event to scroll to bottom of reels page.
   $('#down-arrow').click(function(e) {
-    $('body').animate({scrollTop: document.body.scrollHeight}, 500);
+    $('html, body').animate({scrollTop: document.body.scrollHeight}, 500);
   });
 
   // Click event handler for swapping reel clips.
   reels = {
-    'summaries': ['Qi Aerista Kickstarter Promo', 'Avid Dance Company Promo'],
-    'clips': ['https://www.youtube.com/embed/nIS6qMorab4','https://www.youtube.com/embed/iYZZ6d-JrtU']
+    'summaries': ['Credit Karama', 'Qi Aerista Kickstarter Promo', 'Avid Dance Company Promo'],
+    'clips': ['https://www.youtube.com/embed/iqSVZ2W9BRc', 'https://www.youtube.com/embed/nIS6qMorab4','https://www.youtube.com/embed/iYZZ6d-JrtU']
   }
   reelNum = 0;
   $('#left-arrow').click(function(e) {
-    $('#scroll-player').attr('src', reels.clips[--reelNum % reels.clips.length]);
-    $('#reel-info').text(reels.summaries[reelNum % reels.summaries.length]);
+    $('#scroll-player').attr('src', reels.clips[Math.abs(--reelNum) % reels.clips.length]);
+    $('#reel-info').text(reels.summaries[Math.abs(reelNum) % reels.summaries.length]);
   });
   $('#right-arrow').click(function(e) {
-    $('#scroll-player').attr('src', reels.clips[++reelNum % reels.clips.length]);
-    $('#reel-info').text(reels.summaries[reelNum % reels.summaries.length]);
+    $('#scroll-player').attr('src', reels.clips[Math.abs(++reelNum) % reels.clips.length]);
+    $('#reel-info').text(reels.summaries[Math.abs(reelNum) % reels.summaries.length]);
   });
 
 
@@ -59,7 +56,7 @@ window.onload = function () {
   socket.on('imageResponse', function (obj) {
     portfolioImages = obj.files;
     for (i=0; i < obj.files.length; i++) {
-      var img = "<img id='img-"+i+"' class='image' src='images/portfolio/"+obj.files[i]+"\'>";
+      var img = "<a href='images/portfolio/"+obj.files[i]+"' data-lightbox='box-stuff'><img id='img-"+i+"' class='image' src='images/portfolio/"+obj.files[i]+"\'></a>";
       $('#images-container').html($('#images-container').html() + "\n" + img);
     }
     for (j=0; j < obj.thumbs.length; j++) {
@@ -101,4 +98,11 @@ window.onload = function () {
       }
     });
   }
+
+  lightbox.option({
+      'disableScrolling': true,
+      'imageFadeDuration': 200,
+      'resizeDuration': 100,
+      'wrapAround': true,
+  })
 }
